@@ -1,0 +1,15 @@
+.DS_Store
+.venv
+
+__pycache__/
+notebooks/
+config*.yaml
+!config.yaml
+best_model/
+logs/
+prediction/
+results/
+saved/
+wandb/
+configs/
+TC_Competition/
