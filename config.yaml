@@ -1,0 +1,12 @@
+---
+run_name: data-centric
+use_wandb: true
+dataset:
+  revision: 78725b96bd56420da2377771189f4c84fc39b96d
+data_path:
+  output_csv_path: outputs/output.csv
+  validation_csv_path: outputs/validation.csv
+wandb:
+  entity: salmons
+  project_name: data-centric
+... 
