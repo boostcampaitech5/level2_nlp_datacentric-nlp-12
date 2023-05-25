@@ -99,7 +99,7 @@ def main():
     max_len = 64
     batch_size = 64
     warmup_ratio = 0.1
-    num_epochs = 2
+    num_epochs = 5
     max_grad_norm = 1
     log_interval = 200
     learning_rate =  5e-5
@@ -114,9 +114,9 @@ def main():
     revision = config.dataset["revision"]
 
     train = load_dataset("Smoked-Salmon-s/TC_Competition",
-                        split="train",
-                        column_names=column_names,
-                        revision=revision)
+                         split="train",
+                         column_names=column_names,
+                         revision=revision)
     dataset_train = train.to_pandas().iloc[1:].reset_index(drop=True).astype({"target": "int64"})
 
     valid = load_dataset("Smoked-Salmon-s/TC_Competition",
