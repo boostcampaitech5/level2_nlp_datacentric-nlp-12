@@ -14,3 +14,5 @@ saved/
 wandb/
 configs/
 TC_Competition/
+outputs/
+data/
