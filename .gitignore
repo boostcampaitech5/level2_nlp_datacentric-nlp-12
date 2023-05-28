@@ -1,10 +1,10 @@
 .DS_Store
-.venv
+.venv/
+.cache/
+.vscode/
 
 __pycache__/
 notebooks/
-config*.yaml
-!config.yaml
 best_model/
 logs/
 prediction/
@@ -13,3 +13,10 @@ saved/
 wandb/
 configs/
 TC_Competition/
+output/
+data/
+
+config*.yaml
+!config.yaml
+nohup*.out
+output*.log

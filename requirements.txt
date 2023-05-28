@@ -1,0 +1,11 @@
+accelerate
+evaluate
+ipywidgets
+numpy
+pandas
+python-box
+scikit-learn
+sentencepiece
+torch
+transformers
+wandb
