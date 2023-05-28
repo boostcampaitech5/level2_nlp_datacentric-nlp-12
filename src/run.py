@@ -11,13 +11,13 @@ import torch
 import wandb
 from datasets import load_dataset
 from sklearn.model_selection import train_test_split
+from tqdm import tqdm
 from transformers import (
     AutoModelForSequenceClassification,
     DataCollatorWithPadding,
     Trainer,
     TrainingArguments,
 )
-from tqdm import tqdm
 
 from config import load_config
 from dataset import BERTDataset
@@ -48,11 +48,12 @@ def main():
     DEVICE = torch.device('cuda') if torch.cuda.is_available() else torch.device('cpu')
     print(DEVICE)
 
-    BASE_DIR = os.getcwd()
+    # BASE_DIR = os.getcwd()
+    BASE_DIR = os.path.dirname(os.path.abspath(__file__))
     DATA_DIR = os.path.abspath(os.path.join(BASE_DIR, '../data'))
     OUTPUT_DIR = os.path.abspath(os.path.join(BASE_DIR, '../output'))
     PREDICTION_DIR = os.path.abspath(os.path.join(BASE_DIR, '../prediction'))
-    
+
     column_names = ['ID', 'text', 'target', 'url', 'date']  # For huggingface load_dataset function setting
 
     # Load tokenizer and model
@@ -66,17 +67,17 @@ def main():
         dataset_train, dataset_valid = train_test_split(data, test_size=0.3, random_state=SEED)
     else:
         train = load_dataset('Smoked-Salmon-s/TC_Competition',
-                            split='train',
-                            column_names=column_names,
-                            revision=config.huggingface_datasets.revision)
+                             split='train',
+                             column_names=column_names,
+                             revision=config.huggingface_datasets.revision)
         dataset_train = train.to_pandas().iloc[1:].reset_index(drop=True).astype({'target': 'int64'})
 
         valid = load_dataset('Smoked-Salmon-s/TC_Competition',
-                            split='validation',
-                            column_names=column_names,
-                            revision=config.huggingface_datasets.revision)
+                             split='validation',
+                             column_names=column_names,
+                             revision=config.huggingface_datasets.revision)
         dataset_valid = valid.to_pandas().iloc[1:].reset_index(drop=True).astype({'target': 'int64'})
-    
+
     # Preprocess data
     dataset_train = preprocess_df(dataset_train)
     dataset_valid = preprocess_df(dataset_valid)
@@ -154,7 +155,12 @@ def main():
                             revision=config.huggingface_datasets.revision)
         dataset_test = test.to_pandas().iloc[1:].reset_index(drop=True)
 
-    submission = pd.read_csv(os.path.join(DATA_DIR, 'sample_submission.csv'))
+        dataset_test = dataset_test.iloc[:, :-1]
+        column_names.remove('target')
+        dataset_test.columns = column_names
+
+    SUBMISSION_FILEPATH = os.path.join(DATA_DIR, 'sample_submission.csv')
+    submission = pd.read_csv(SUBMISSION_FILEPATH)
     submission = submission.rename(columns={'label': 'target'})
 
     model.eval()
@@ -185,6 +191,7 @@ def main():
     dataset_valid['pred'] = dev_preds
     dataset_valid = dataset_valid[['ID', 'text', 'target', 'pred', 'url', 'date']]
     dataset_valid.to_csv(VALID_PREDICTION_FILEPATH, index=False)
+
 
 if __name__ == '__main__':
     main()
