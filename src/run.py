@@ -83,8 +83,8 @@ def main():
     dataset_valid = preprocess_df(dataset_valid)
 
     # Define dataset
-    data_train = BERTDataset(dataset_train, tokenizer)
-    data_valid = BERTDataset(dataset_valid, tokenizer)
+    data_train = BERTDataset(dataset_train, tokenizer, config.dataset.max_seq_len)
+    data_valid = BERTDataset(dataset_valid, tokenizer, config.dataset.max_seq_len)
 
     data_collator = DataCollatorWithPadding(tokenizer=tokenizer)
 
