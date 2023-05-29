@@ -3,12 +3,12 @@ from torch.utils.data import Dataset
 
 
 class BERTDataset(Dataset):
-    def __init__(self, data, tokenizer):
+    def __init__(self, data, tokenizer, max_length):
         input_texts = data['text']
         targets = data['target']
         self.inputs = []; self.labels = []
         for text, label in zip(input_texts, targets):
-            tokenized_input = tokenizer(text, padding='max_length', truncation=True, return_tensors='pt')
+            tokenized_input = tokenizer(text, padding='max_length', max_length=max_length, truncation=True, return_tensors='pt')
             self.inputs.append(tokenized_input)
             self.labels.append(torch.tensor(label))
 
