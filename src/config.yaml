@@ -3,6 +3,8 @@ use_wandb: true
 use_local_dataset: false
 huggingface_datasets:
   revision: 280245a63e4e68a2751005a88314959a9dce1c44
+dataset:
+  max_seq_len: 64
 output_filename:
   prediction: prediction.csv
   validation_prediction: validation_prediction.csv
