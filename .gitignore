@@ -15,6 +15,7 @@ configs/
 TC_Competition/
 output/
 data/
+eda/
 
 config*.yaml
 !config.yaml
