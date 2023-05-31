@@ -4,6 +4,7 @@ import urllib.parse
 from functools import partial
 from typing import Any, List, Tuple
 
+import pandas as pd
 import pyderman
 from selenium import webdriver
 from selenium.common.exceptions import TimeoutException
@@ -11,8 +12,6 @@ from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import WebDriverWait
-
-import pandas as pd
 from tqdm.auto import tqdm
 tqdm.pandas()
 
