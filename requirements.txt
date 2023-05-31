@@ -3,8 +3,10 @@ evaluate
 ipywidgets
 numpy
 pandas
+pyderman
 python-box
 scikit-learn
+selenium
 sentencepiece
 torch
 transformers
