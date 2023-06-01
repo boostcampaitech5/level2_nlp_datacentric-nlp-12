@@ -79,8 +79,8 @@ def main():
         dataset_valid = valid.to_pandas().iloc[1:].reset_index(drop=True).astype({'target': 'int64'})
 
     # Preprocess data
-    dataset_train = preprocess_df(dataset_train, config.dataset.hanja, config.dataset.special, config.dataset.jonghab)
-    dataset_valid = preprocess_df(dataset_valid, config.dataset.hanja, config.dataset.special, config.dataset.jonghab)
+    dataset_train = preprocess_df(dataset_train, config.dataset.h2h, config.dataset.special, config.dataset.jonghab)
+    dataset_valid = preprocess_df(dataset_valid, config.dataset.h2h, config.dataset.special, config.dataset.jonghab)
 
     # Define dataset
     data_train = BERTDataset(dataset_train, tokenizer, config.dataset.max_seq_len)
