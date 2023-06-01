@@ -5,9 +5,9 @@ huggingface_datasets:
   revision: 280245a63e4e68a2751005a88314959a9dce1c44
 dataset:
   max_seq_len: 64
-  hanja: false
-  special: false
-  jonghab: false
+  h2h: true
+  special: true
+  jonghab: true
 output_filename:
   prediction: prediction.csv
   validation_prediction: validation_prediction.csv
