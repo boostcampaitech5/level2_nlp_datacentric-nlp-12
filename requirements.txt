@@ -1,7 +1,10 @@
 accelerate
 evaluate
+hanja
 ipywidgets
+langchain
 numpy
+openai
 pandas
 pyderman
 python-box
