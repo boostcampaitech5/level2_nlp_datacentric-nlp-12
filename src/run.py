@@ -19,11 +19,10 @@ from transformers import (
     TrainingArguments,
 )
 
-from config import load_config
 from dataset import BERTDataset
 from preprocess import preprocess_df
 from tokenization_kobert import KoBertTokenizer
-from util import compute_metrics
+from util import compute_metrics, load_config
 
 
 def main():
